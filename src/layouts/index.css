@@ -1,0 +1,35 @@
+.normal {
+  font-family: Georgia, sans-serif;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: normal;
+  letter-spacing: -1px;
+  padding: 0.6em 0;
+  margin: 0;
+  text-align: center;
+  opacity: 0.65;
+  margin-left: 135px;
+}
+.content {
+  margin-top: 80px;
+}
+.divTitle {
+  background-color: hsla(0, 0%, 100%, 0.8);
+  height: 80px;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  top: 0;
+  -ms-flex-align: center;
+  align-items: center;
+  line-height: 80px;
+}
+.link {
+  position: fixed;
+  right: 3px;
+}
+.img {
+  width: 50px;
+}
