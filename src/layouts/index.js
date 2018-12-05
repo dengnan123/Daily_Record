@@ -40,10 +40,10 @@ class Layout extends Component {
           document.body.scrollTop || document.documentElement.scrollTop;
         if (top2 > top1) {
           nav.style =
-            " height:53px; width:100%;  position:fixed; top:-100px;left:0; transition:0.3s;";
+            " height:53px; width:100%;  position:fixed; top:-200px;left:0; transition:0.6s;";
         } else {
           nav.style =
-            " height:53px; width:100%;  position:fixed; top:0;left:0; transition:0.3s;";
+            " height:53px; width:100%;     opacity: 0.8;  position:fixed; top:0;left:0; transition:0.6s;";
         }
         // top1 = top2;
       };

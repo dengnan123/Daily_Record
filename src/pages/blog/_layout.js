@@ -21,6 +21,11 @@ function BasicLayout(props) {
             className={styles.img}
           />
         </a>
+        <div className={styles.left}>
+          <div>工作</div>
+          <div>生活</div>
+          <div>随笔</div>
+        </div>
       </div>
       <div className={styles.content}>{props.children}</div>
     </div>

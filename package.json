@@ -33,6 +33,8 @@
   },
   "dependencies": {
     "gh-pages": "^2.0.1",
+    "highlight.js": "^9.13.1",
+    "marked": "^0.5.2",
     "moment": "^2.22.2",
     "react-markdown": "^4.0.4"
   }

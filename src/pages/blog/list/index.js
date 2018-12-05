@@ -3,6 +3,8 @@ import { connect } from "dva";
 import router from "umi/router";
 import moment from "moment";
 import ReactMarkdown from "react-markdown";
+import hljs from "highlight.js";
+import marked from "marked";
 // import PropTypes from "prop-types";
 import { Row, Col, Card, Skeleton, Icon } from "antd";
 import styles from "./index.less";
@@ -10,6 +12,11 @@ import styles from "./index.less";
 class FleetList extends Component {
   componentDidMount() {
     const { dispatch, numberArr } = this.props;
+    marked.setOptions({
+      highlight: code => {
+        return hljs.highlightAuto(code).value;
+      }
+    });
     if (!numberArr.length) {
       dispatch({
         type: "indexModel/getList"
@@ -41,7 +48,14 @@ class FleetList extends Component {
                     }}
                   >
                     <div className={styles.content}>
-                      <ReactMarkdown source={value.body.slice(0, 65)} />
+                      {/* <ReactMarkdown source={value.body.slice(0, 65)} /> */}
+                      {value.body ? (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: marked(value.body.slice(0, 65))
+                          }}
+                        />
+                      ) : null}
                     </div>
 
                     <div className={styles.bottomDiv}>

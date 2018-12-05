@@ -3,7 +3,10 @@ import qs from "qs";
 import { message } from "antd";
 import router from "umi/router";
 // import { getCookie } from './helper';
-const access_token = "ee2b8d4a79828325c8fa82026a3b7a45758021b6";
+const tokenArr = ["72a57cd810527287670f3724", "fef235ffb95e4bbe"];
+const str = "72a57cd810527287670f3724fef235ffb95e4bbe";
+// const access_token = "e14fce38413495461c461eea860b3272f39ddb42";
+// 72a57cd810527287670f3724fef235ffb95e4bbe
 const codeMessage = {
   200: "服务器成功返回请求的数据。",
   201: "新建或修改数据成功。",
@@ -80,10 +83,12 @@ export default function request(url, options = { method: "GET" }) {
       //   uuid:getCookie('uuid'),
       //   userpid:getCookie('uuid'),
     }
-    //3475ac5953d8217eb40c8366b1edd90445ed0d0b
   };
 
   options.method.toLocaleUpperCase();
+  const access_token = tokenArr.join("");
+  console.log("access_token", access_token.length);
+  console.log("str", str.length);
   // url = `${url}?access_token=${access_token}`;
   if (options.body) {
     if (options.method === "GET") {
