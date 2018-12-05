@@ -3,7 +3,7 @@ import { connect } from "dva";
 import ReactMarkdown from "react-markdown";
 // import router from "umi/router";
 // import PropTypes from "prop-types";
-import { Skeleton } from "antd";
+import { Skeleton, Card } from "antd";
 import styles from "./index.less";
 
 class Detail extends Component {
@@ -38,13 +38,26 @@ class Detail extends Component {
   }
 
   render() {
-    const { loading, info } = this.props;
+    const { loading, info, arr } = this.props;
     const isLoading = loading.effects["indexModel/getInfo"];
     return (
       <div className={styles.pageContent}>
         <Skeleton loading={isLoading} active>
-          {info.body ? <ReactMarkdown source={info.body} /> : null}
+          {/* {info.body ? <ReactMarkdown source={info.body} /> : null} */}
+          <Card
+            // loading={isLoading}
+            className={styles.card}
+          >
+            {info.body ? <ReactMarkdown source={info.body} /> : null}
+          </Card>
         </Skeleton>
+        {arr.map((value, index) => {
+          return (
+            <Skeleton loading={isLoading} active key={index}>
+              {""}
+            </Skeleton>
+          );
+        })}
       </div>
     );
   }
@@ -53,10 +66,12 @@ class Detail extends Component {
 function indexStateToProps(state) {
   const { loading } = state;
   const { info, numberArr } = state.indexModel;
+  const arr = Array(10).fill(0);
   return {
     loading,
     info,
-    numberArr
+    numberArr,
+    arr
   };
 }
 

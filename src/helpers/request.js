@@ -3,7 +3,7 @@ import qs from "qs";
 import { message } from "antd";
 import router from "umi/router";
 // import { getCookie } from './helper';
-const access_token = "f0be6fc4e15cf2441be6f3b800e738cf4a60afb5";
+const access_token = "ee2b8d4a79828325c8fa82026a3b7a45758021b6";
 const codeMessage = {
   200: "服务器成功返回请求的数据。",
   201: "新建或修改数据成功。",

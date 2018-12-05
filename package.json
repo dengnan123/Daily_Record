@@ -1,6 +1,6 @@
 {
   "private": true,
-  "homepage": "https://dengnan123.github.io/",
+  "homepage": "https://dengnan123.github.io/Daily_Record",
   "scripts": {
     "start": "umi dev",
     "build": "umi build",
