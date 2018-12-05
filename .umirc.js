@@ -3,7 +3,7 @@ export default {
       ie: 9
     },
     publicPath: "./",
-    base: "/Daily-record",
+    base: "/Daily_Record",
     plugins: [
       [
         "umi-plugin-react",
