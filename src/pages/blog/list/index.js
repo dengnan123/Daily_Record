@@ -10,12 +10,24 @@ import { Row, Col, Card, Skeleton, Icon } from "antd";
 import styles from "./index.less";
 
 class FleetList extends Component {
-  componentDidMount() {
+  componentWillMount() {
     marked.setOptions({
       highlight: code => {
         return hljs.highlightAuto(code).value;
       }
     });
+  }
+
+  componentDidMount() {
+    const { high } = this.props;
+    window.scrollTo({
+      top: high,
+      behavior: "smooth"
+    });
+    console.log(
+      "document.documentElement.scrollTop",
+      document.documentElement.scrollTop
+    );
   }
 
   click = id => {
@@ -26,6 +38,8 @@ class FleetList extends Component {
       },
       obj
     } = this.props;
+    var high = document.body.scrollTop || document.documentElement.scrollTop;
+    console.log("highhighhigh", high);
     let info = {};
     if (obj[parseInt(id, 10)]) {
       info = {
@@ -36,7 +50,8 @@ class FleetList extends Component {
       type: "indexModel/save",
       payload: {
         info,
-        type: labels ? labels : "all"
+        type: labels ? labels : "all",
+        high
       }
     });
     let url = "/blog/detail?";
@@ -107,7 +122,7 @@ class FleetList extends Component {
 
 function indexStateToProps(state) {
   const { loading } = state;
-  const { list, count, numberArr, type, obj } = state.indexModel;
+  const { list, count, numberArr, type, obj, high } = state.indexModel;
   const arr = Array(15).fill(0);
   return {
     loading,
@@ -116,7 +131,8 @@ function indexStateToProps(state) {
     arr,
     numberArr,
     type,
-    obj
+    obj,
+    high
   };
 }
 

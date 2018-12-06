@@ -12,7 +12,8 @@ export default {
     labels: [],
     type: "all",
     from: "list",
-    obj: {}
+    obj: {},
+    high: 0
   },
 
   reducers: {
