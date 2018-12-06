@@ -35,8 +35,8 @@ export default {
     *getList({ payload }, { call, put, select }) {
       const type_ = yield select(state => state.indexModel.type);
       const from = yield select(state => state.indexModel.from);
-      console.log("type_type_", type_);
-      console.log("payload.labels", payload.labels);
+      // console.log("type_type_", type_);
+      // console.log("payload.labels", payload.labels);
       const labels = payload.labels;
       if (type_ !== labels) {
         console.log("获取列表");
