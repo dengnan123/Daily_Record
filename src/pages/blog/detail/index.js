@@ -36,10 +36,11 @@ class Detail extends Component {
   }
 
   handleScroll() {
-    window.scrollTo({
-      top: -100,
-      behavior: "smooth"
-    });
+    // window.scrollTo({
+    //   top: -100,
+    //   behavior: "smooth"
+    // });
+    window.scrollTo(0, 0);
     // document.documentElement.scrollTop = -120;
   }
 
