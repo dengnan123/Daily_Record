@@ -3,8 +3,6 @@ import { connect } from "dva";
 import ReactMarkdown from "react-markdown";
 import hljs from "highlight.js";
 import marked from "marked";
-// import router from "umi/router";
-// import PropTypes from "prop-types";
 import { Skeleton, Card } from "antd";
 import styles from "./index.less";
 
