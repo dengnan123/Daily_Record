@@ -47,7 +47,8 @@ class Detail extends Component {
     const { loading, info, arr } = this.props;
     const isLoading = loading.effects["indexModel/getInfo"];
     return (
-      <div className={styles.pageContent}>
+      // <div className={styles.pageContent}>
+      <div>
         <Skeleton loading={isLoading} active>
           <Card className={styles.card}>
             {info.body ? (

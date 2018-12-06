@@ -5,6 +5,9 @@ import router from "umi/router";
 import { Skeleton, Progress } from "antd";
 
 class BasicLayout extends Component {
+  componentWillMount() {
+    this.widthChange();
+  }
   componentDidMount() {
     const { dispatch, labels } = this.props;
     if (!labels.length) {
@@ -12,7 +15,25 @@ class BasicLayout extends Component {
         type: "indexModel/getLabels"
       });
     }
+
+    window.addEventListener("resize", this.widthChange);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.widthChange);
+  }
+
+  widthChange = () => {
+    const { dispatch } = this.props;
+    const widthSize = window.innerWidth;
+    // console.log("widthSize", widthSize);
+    dispatch({
+      type: "indexModel/save",
+      payload: {
+        innerWidth: widthSize
+      }
+    });
+  };
 
   click = () => {
     const path_ = getPath(this.props);
@@ -30,8 +51,10 @@ class BasicLayout extends Component {
     const {
       loading,
       labels,
-      location: { query }
+      location: { query },
+      innerWidth
     } = this.props;
+    console.log("页面宽度", innerWidth);
     const type = query.labels;
     const isLoading = loading.effects["indexModel/getLabels"];
     return (
@@ -50,25 +73,27 @@ class BasicLayout extends Component {
               className={styles.img}
             />
           </a>
-          <Skeleton loading={isLoading} active className={styles.skeleton}>
-            <div className={styles.left}>
-              {labels.map((value, index) => {
-                return (
-                  <div
-                    key={value.name}
-                    className={type === value.name ? styles.divBlue : null}
-                    onClick={() => {
-                      this.divClick(value.name);
-                    }}
-                  >
-                    {value.name}
-                  </div>
-                );
-              })}
-            </div>
-          </Skeleton>
+          {innerWidth < 450 ? null : (
+            <Skeleton loading={isLoading} active className={styles.skeleton}>
+              <div className={styles.left}>
+                {labels.map((value, index) => {
+                  return (
+                    <div
+                      key={value.name}
+                      className={type === value.name ? styles.divBlue : null}
+                      onClick={() => {
+                        this.divClick(value.name);
+                      }}
+                    >
+                      {value.name}
+                    </div>
+                  );
+                })}
+              </div>
+            </Skeleton>
+          )}
         </div>
-        <div className={styles.content}>{this.props.children}</div>
+        <div className={innerWidth < 450 ? styles.contentOther : styles.content}>{this.props.children}</div>
       </div>
     );
   }
@@ -85,11 +110,12 @@ function getPath(props) {
 
 function indexStateToProps(state) {
   const { loading } = state;
-  const { labels, type } = state.indexModel;
+  const { labels, type, innerWidth } = state.indexModel;
   return {
     loading,
     labels,
-    type
+    type,
+    innerWidth
   };
 }
 

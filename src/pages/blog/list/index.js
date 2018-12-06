@@ -63,10 +63,11 @@ class FleetList extends Component {
   };
 
   render() {
-    const { loading, arr, list } = this.props;
+    const { loading, arr, list, innerWidth } = this.props;
     const isLoading = loading.effects["indexModel/getList"];
     return (
-      <div className={styles.pageContent}>
+      // <div className={innerWidth < 450 ? null : styles.pageContent}>
+      <div>
         <Skeleton loading={isLoading} active>
           <Row type="flex" justify="center">
             <Col span={24}>
@@ -122,7 +123,15 @@ class FleetList extends Component {
 
 function indexStateToProps(state) {
   const { loading } = state;
-  const { list, count, numberArr, type, obj, high } = state.indexModel;
+  const {
+    list,
+    count,
+    numberArr,
+    type,
+    obj,
+    high,
+    innerWidth
+  } = state.indexModel;
   const arr = Array(15).fill(0);
   return {
     loading,
@@ -132,7 +141,8 @@ function indexStateToProps(state) {
     numberArr,
     type,
     obj,
-    high
+    high,
+    innerWidth
   };
 }
 

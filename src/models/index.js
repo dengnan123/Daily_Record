@@ -13,7 +13,8 @@ export default {
     type: "all",
     from: "list",
     obj: {},
-    high: 0
+    high: 0,
+    innerWidth: null
   },
 
   reducers: {

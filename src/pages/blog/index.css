@@ -20,8 +20,22 @@
 }
 
 .content {
-  margin-top: 55px;
-  height: 100%;
+  /* margin-top: 55px;
+  height: 100%; */
+  width: 75%;
+  margin: auto;
+  margin-top: 75px;
+  margin-bottom: 30px;
+  /* margin-left: 17%; */
+  max-width: 960px;
+  /* margin: auto; */
+  padding-left: 5%;
+}
+
+.contentOther {
+  margin-top: 75px;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 .divTitle {
@@ -53,16 +67,18 @@
 .left div:hover {
   color: #46bc99;
 }
+
 .skeleton {
   /* width: 15%;
   margin-left: 5%; */
-
   width: 8%;
   margin-left: 11%;
 }
+
 .skeleton ul {
   padding: 0px;
 }
+
 .divBlue {
   color: #46bc99;
 }
