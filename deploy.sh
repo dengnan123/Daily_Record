@@ -16,3 +16,6 @@ echo "git push 成功"
 npm run deploy
 
 echo "发布成功"
+
+PORT=8001 npm start
+
