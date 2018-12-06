@@ -60,7 +60,10 @@ class BasicLayout extends Component {
     return (
       <div className={styles.normal}>
         <div className={styles.divTitle} id="nav">
-          <span className={styles.title} onClick={this.click}>
+          <span
+            className={innerWidth < 450 ? styles.titleOther : styles.title}
+            onClick={this.click}
+          >
             Daily Record
           </span>
           <a
@@ -93,7 +96,11 @@ class BasicLayout extends Component {
             </Skeleton>
           )}
         </div>
-        <div className={innerWidth < 450 ? styles.contentOther : styles.content}>{this.props.children}</div>
+        <div
+          className={innerWidth < 450 ? styles.contentOther : styles.content}
+        >
+          {this.props.children}
+        </div>
       </div>
     );
   }
