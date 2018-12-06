@@ -12,16 +12,16 @@ class Layout extends Component {
             document.body.scrollTop || document.documentElement.scrollTop;
           if (top2 > top1) {
             nav.style =
-              " height:53px; width:100%;  position:fixed; top:-200px;left:0; transition:0.4s;";
+              " height:53px; width:100%;  position:fixed; top:-200px;left:0;  transform:scale(0);";    //transition:0.4s;
           } else {
             nav.style =
-              " height:53px; width:100%;     opacity: 0.8;  position:fixed; top:0;left:0; transition:0.4s;";
+              " height:53px; width:100%;     opacity: 0.8;  position:fixed; top:0;left:0; transform:scale(1);";
           }
           // top1 = top2;
         };
       }
     };
-  }
+  }3
 
   //   componentDidUpdate(prevProps) {
   //     if (this.props.location !== prevProps.location) {
