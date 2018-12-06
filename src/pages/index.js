@@ -16,7 +16,8 @@ class Index extends Component {
       <div className={styles.pageContent}>
         {/* <Card> */}
         <Button onClick={this.click} className={styles.indexContent}>
-          博客首页
+          {/* 博客首页 */}
+          Daily Record
         </Button>
         {/* </Card> */}
       </div>

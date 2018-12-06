@@ -18,3 +18,13 @@ export async function getInfo(params) {
     }
   );
 }
+
+
+export async function getLabels(params) {
+  return request(
+    `https://api.github.com/repos/dengnan123/Daily-record/labels`,
+    {
+      method: "GET"
+    }
+  );
+}

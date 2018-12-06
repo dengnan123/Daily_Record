@@ -1,5 +1,5 @@
 import * as indexService from "../service/index";
-
+import qs from "qs";
 export default {
   namespace: "indexModel",
 
@@ -8,7 +8,11 @@ export default {
     count: 0,
     id: "",
     info: {},
-    numberArr: []
+    numberArr: [],
+    labels: [],
+    type: "all",
+    from: "list",
+    obj: {}
   },
 
   reducers: {
@@ -17,17 +21,6 @@ export default {
     },
     save(state, { payload }) {
       return { ...state, ...payload };
-    },
-    saveInfo(state, { payload }) {
-      const { list } = state;
-      let obj = {};
-      for (const value of list) {
-        const { number } = value;
-        if (number === parseInt(payload.id, 10)) {
-          obj = { ...value };
-        }
-      }
-      return { ...state, ...{ info: obj } };
     },
     clearModel(state) {
       const obj = {};
@@ -39,17 +32,36 @@ export default {
   },
 
   effects: {
-    *getList({ payload }, { call, put }) {
-      const res = yield call(indexService.getList, payload);
-      if (res) {
-        const numberArr = res.map(value => value.number);
-        yield put({
-          type: "save",
-          payload: {
-            list: res,
-            numberArr
+    *getList({ payload }, { call, put, select }) {
+      const type_ = yield select(state => state.indexModel.type);
+      const from = yield select(state => state.indexModel.from);
+      console.log("type_type_", type_);
+      console.log("payload.labels", payload.labels);
+      const labels = payload.labels;
+      if (type_ !== labels) {
+        console.log("获取列表");
+        const res = yield call(indexService.getList, payload);
+        if (res) {
+          const numberArr = res.map(value => value.number);
+          const obj = {};
+          for (const value of res) {
+            const { number, body } = value;
+            obj[number] = body;
           }
-        });
+          yield put({
+            type: "save",
+            payload: {
+              list: res,
+              numberArr,
+              obj
+            }
+          });
+        } else {
+          yield put({
+            type: "save",
+            payload: {}
+          });
+        }
       } else {
         yield put({
           type: "save",
@@ -72,17 +84,43 @@ export default {
           payload: {}
         });
       }
+    },
+    *getLabels({ payload }, { call, put }) {
+      const res = yield call(indexService.getLabels, payload);
+      if (res) {
+        yield put({
+          type: "save",
+          payload: {
+            labels: res
+          }
+        });
+      } else {
+        yield put({
+          type: "save",
+          payload: {}
+        });
+      }
     }
   },
   subscriptions: {
     setup({ history, dispatch }) {
       return history.listen(({ pathname, search }) => {
-        // if (pathname === "/") {
-        //   dispatch({
-        //     type: "getList",
-        //     payload: {}
-        //   });
-        // }
+        if (pathname === "/blog/list") {
+          const arr = search.split("?");
+          let data = qs.parse(arr[1]);
+          if (JSON.stringify(data) === "{}") {
+            data = {
+              per: 1,
+              per_page: 100
+            };
+          }
+          dispatch({
+            type: "getList",
+            payload: {
+              ...data
+            }
+          });
+        }
       });
     }
   }

@@ -24,24 +24,10 @@ class Detail extends Component {
         query: { id }
       },
       dispatch,
-      numberArr
+      info
     } = this.props;
     this.handleScroll();
-    // 代码高亮
-    // marked.setOptions({
-    //   highlight: code => {
-    //     return hljs.highlightAuto(code).value;
-    //   }
-    // });
-
-    if (numberArr.includes(parseInt(id, 10))) {
-      dispatch({
-        type: "indexModel/saveInfo",
-        payload: {
-          id
-        }
-      });
-    } else {
+    if (JSON.stringify(info) === "{}") {
       dispatch({
         type: "indexModel/getInfo",
         payload: {
@@ -50,9 +36,9 @@ class Detail extends Component {
       });
     }
   }
+
   handleScroll() {
     document.documentElement.scrollTop = -120;
-    let scrollTop = document.body.scrollTop;
   }
 
   render() {
@@ -62,7 +48,6 @@ class Detail extends Component {
       <div className={styles.pageContent}>
         <Skeleton loading={isLoading} active>
           <Card className={styles.card}>
-            {/* {info.body ? <ReactMarkdown source={info.body} /> : null} */}
             {info.body ? (
               <div dangerouslySetInnerHTML={{ __html: marked(info.body) }} />
             ) : null}
@@ -82,13 +67,14 @@ class Detail extends Component {
 
 function indexStateToProps(state) {
   const { loading } = state;
-  const { info, numberArr } = state.indexModel;
+  const { info, numberArr, obj } = state.indexModel;
   const arr = Array(10).fill(0);
   return {
     loading,
     info,
     numberArr,
-    arr
+    arr,
+    obj
   };
 }
 

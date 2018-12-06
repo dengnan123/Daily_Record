@@ -11,21 +11,40 @@ import styles from "./index.less";
 
 class FleetList extends Component {
   componentDidMount() {
-    const { dispatch, numberArr } = this.props;
     marked.setOptions({
       highlight: code => {
         return hljs.highlightAuto(code).value;
       }
     });
-    if (!numberArr.length) {
-      dispatch({
-        type: "indexModel/getList"
-      });
-    }
   }
 
   click = id => {
-    router.push(`/blog/detail?id=${id}`);
+    const {
+      dispatch,
+      location: {
+        query: { labels }
+      },
+      obj
+    } = this.props;
+    let info = {};
+    if (obj[parseInt(id, 10)]) {
+      info = {
+        body: obj[parseInt(id, 10)]
+      };
+    }
+    dispatch({
+      type: "indexModel/save",
+      payload: {
+        info,
+        type: labels ? labels : "all"
+      }
+    });
+    let url = "/blog/detail?";
+    if (labels) {
+      url = `${url}labels=${labels}&`;
+    }
+    url = `${url}id=${id}`;
+    router.push(url);
   };
 
   render() {
@@ -48,14 +67,15 @@ class FleetList extends Component {
                     }}
                   >
                     <div className={styles.content}>
+                      {value.body.slice(0, 65)}
                       {/* <ReactMarkdown source={value.body.slice(0, 65)} /> */}
-                      {value.body ? (
+                      {/* {value.body ? (
                         <div
                           dangerouslySetInnerHTML={{
                             __html: marked(value.body.slice(0, 65))
                           }}
                         />
-                      ) : null}
+                      ) : null} */}
                     </div>
 
                     <div className={styles.bottomDiv}>
@@ -95,14 +115,16 @@ class FleetList extends Component {
 
 function indexStateToProps(state) {
   const { loading } = state;
-  const { list, count, numberArr } = state.indexModel;
+  const { list, count, numberArr, type, obj } = state.indexModel;
   const arr = Array(15).fill(0);
   return {
     loading,
     list,
     count,
     arr,
-    numberArr
+    numberArr,
+    type,
+    obj
   };
 }
 
