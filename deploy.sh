@@ -12,3 +12,7 @@ echo "git pull --rebase 成功"
 git push 
 
 echo "git push 成功"
+
+npm run deploy
+
+echo "发布成功"

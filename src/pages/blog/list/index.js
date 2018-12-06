@@ -68,14 +68,6 @@ class FleetList extends Component {
                   >
                     <div className={styles.content}>
                       {value.body.slice(0, 65)}
-                      {/* <ReactMarkdown source={value.body.slice(0, 65)} /> */}
-                      {/* {value.body ? (
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: marked(value.body.slice(0, 65))
-                          }}
-                        />
-                      ) : null} */}
                     </div>
 
                     <div className={styles.bottomDiv}>
