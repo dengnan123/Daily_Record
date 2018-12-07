@@ -3,9 +3,9 @@ import withRouter from "umi/withRouter";
 
 class Layout extends Component {
   state = {
-    oldHigh: 10
+    oldHigh: 15
   };
-  componentDidMount() {
+  componentWillMount() {
     window.addEventListener("scroll", this.handlerScroll);
 
     // window.onload = function() {
