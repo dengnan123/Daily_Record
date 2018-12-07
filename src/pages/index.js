@@ -11,15 +11,23 @@ class Index extends Component {
     router.push(`/blog/list`);
   };
 
+  demoClick = () => {
+    router.push(`/demo`);
+  };
+
   render() {
     return (
       <div className={styles.pageContent}>
-        {/* <Card> */}
-        <Button onClick={this.click} className={styles.indexContent}>
-          {/* 博客首页 */}
-          Daily Record
-        </Button>
-        {/* </Card> */}
+        <div className={styles.indexContent}>
+          <Button onClick={this.click} className={styles.spanHover}>
+            Daily Record
+          </Button>
+        </div>
+        <div className={styles.indexContent}>
+          <Button onClick={this.demoClick} className={styles.spanHover}>
+            demo
+          </Button>
+        </div>
       </div>
     );
   }

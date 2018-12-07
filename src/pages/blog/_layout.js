@@ -26,7 +26,6 @@ class BasicLayout extends Component {
   widthChange = () => {
     const { dispatch } = this.props;
     const widthSize = window.innerWidth;
-    // console.log("widthSize", widthSize);
     dispatch({
       type: "indexModel/save",
       payload: {
@@ -54,7 +53,6 @@ class BasicLayout extends Component {
       location: { query },
       innerWidth
     } = this.props;
-    console.log("页面宽度", innerWidth);
     const type = query.labels;
     const isLoading = loading.effects["indexModel/getLabels"];
     return (

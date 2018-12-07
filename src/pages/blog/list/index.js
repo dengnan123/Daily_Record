@@ -75,9 +75,11 @@ class FleetList extends Component {
                 return (
                   <Card
                     key={value.id}
+                    bordered={false}
                     title={value.title}
                     bordered={false}
                     className={styles.cardSpan}
+                    headStyle={{ color: "#3863a0" }}
                     onClick={() => {
                       this.click(value.number);
                     }}

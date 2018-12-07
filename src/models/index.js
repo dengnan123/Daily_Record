@@ -1,6 +1,6 @@
 import * as indexService from "../service/index";
 import qs from "qs";
-import { normalize, schema } from 'normalizr';
+import { normalize, schema } from "normalizr";
 export default {
   namespace: "indexModel",
 
@@ -43,7 +43,7 @@ export default {
       const labels = payload.labels;
       if (type_ !== labels) {
         const res = yield call(indexService.getList, payload);
-        
+
         if (res) {
           const numberArr = res.map(value => value.number);
           const obj = {};
@@ -128,3 +128,21 @@ export default {
     }
   }
 };
+
+function getData() {
+  // Define a users schema
+  const user = new schema.Entity("users");
+
+  // Define your comments schema
+  const comment = new schema.Entity("comments", {
+    commenter: user
+  });
+
+  // Define your article
+  const article = new schema.Entity("articles", {
+    author: user,
+    comments: [comment]
+  });
+
+  const normalizedData = normalize(originalData, article);
+}
