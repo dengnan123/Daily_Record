@@ -53,6 +53,7 @@ export default {
         });
         return;
       }
+
       const res = yield call(indexService.getList, payload);
       if (res) {
         const numberArr = res.map(value => value.number);
@@ -131,9 +132,9 @@ export default {
               per_page: 100
             };
           }
-          if (!data.labels) {
-            data.labels = "all";
-          }
+          // if (!data.labels) {
+          //   data.labels = "all";
+          // }
           dispatch({
             type: "getList",
             payload: {
