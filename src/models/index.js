@@ -1,5 +1,6 @@
 import * as indexService from "../service/index";
 import qs from "qs";
+import { normalize, schema } from 'normalizr';
 export default {
   namespace: "indexModel",
 
@@ -41,8 +42,8 @@ export default {
       // console.log("payload.labels", payload.labels);
       const labels = payload.labels;
       if (type_ !== labels) {
-        console.log("获取列表");
         const res = yield call(indexService.getList, payload);
+        
         if (res) {
           const numberArr = res.map(value => value.number);
           const obj = {};

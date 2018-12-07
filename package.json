@@ -36,6 +36,7 @@
     "highlight.js": "^9.13.1",
     "marked": "^0.5.2",
     "moment": "^2.22.2",
+    "normalizr": "^3.3.0",
     "qs": "^6.6.0",
     "react-markdown": "^4.0.4"
   }
