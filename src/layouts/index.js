@@ -38,10 +38,10 @@ class Layout extends Component {
     if (newHigh > oldHigh) {
       const nav = document.getElementById("nav");
       nav.style =
-        " height:53px; width:100%;  position:fixed; top:-200px;left:0; transition:0.5s;"; //transition:0.4s;
+        " height:53px; width:100%;  position:fixed; top:-200px;left:0; transition:0.6s;"; //transition:0.4s;
     } else {
       nav.style =
-        " height:53px; width:100%; position:fixed; top:0;left:0; transition:0.5s;";
+        " height:53px; width:100%; position:fixed; top:0;left:0; transition:0.6s;";
     }
     this.setState(pre => ({
       oldHigh: newHigh
