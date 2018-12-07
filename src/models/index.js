@@ -15,7 +15,8 @@ export default {
     from: "list",
     obj: {},
     high: 0,
-    innerWidth: null
+    innerWidth: null,
+    cache: {}
   },
 
   reducers: {
@@ -37,40 +38,53 @@ export default {
   effects: {
     *getList({ payload }, { call, put, select }) {
       const type_ = yield select(state => state.indexModel.type);
-      const from = yield select(state => state.indexModel.from);
-      // console.log("type_type_", type_);
-      // console.log("payload.labels", payload.labels);
+      const cache = yield select(state => state.indexModel.cache);
       const labels = payload.labels;
-      if (type_ !== labels) {
-        const res = yield call(indexService.getList, payload);
-
-        if (res) {
-          const numberArr = res.map(value => value.number);
-          const obj = {};
-          for (const value of res) {
-            const { number, body } = value;
-            obj[number] = body;
+      console.log("labelslabels", labels);
+      console.log("cachecache", cache);
+      // if (type_ !== labels) {
+      if (cache[labels]) {
+        console.log("进入缓存");
+        yield put({
+          type: "save",
+          payload: {
+            list: cache[labels]
           }
-          yield put({
-            type: "save",
-            payload: {
-              list: res,
-              numberArr,
-              obj
-            }
-          });
-        } else {
-          yield put({
-            type: "save",
-            payload: {}
-          });
+        });
+        return;
+      }
+      const res = yield call(indexService.getList, payload);
+      if (res) {
+        const numberArr = res.map(value => value.number);
+        const obj = {};
+        for (const value of res) {
+          const { number, body } = value;
+          obj[number] = body;
         }
+        yield put({
+          type: "save",
+          payload: {
+            list: res,
+            numberArr,
+            obj,
+            cache: {
+              ...cache,
+              [labels]: res
+            }
+          }
+        });
       } else {
         yield put({
           type: "save",
           payload: {}
         });
       }
+      // } else {
+      //   yield put({
+      //     type: "save",
+      //     payload: {}
+      //   });
+      // }
     },
     *getInfo({ payload }, { call, put }) {
       const res = yield call(indexService.getInfo, payload);
@@ -116,6 +130,9 @@ export default {
               per: 1,
               per_page: 100
             };
+          }
+          if (!data.labels) {
+            data.labels = "all";
           }
           dispatch({
             type: "getList",

@@ -24,10 +24,6 @@ class FleetList extends Component {
       top: high,
       behavior: "smooth"
     });
-    console.log(
-      "document.documentElement.scrollTop",
-      document.documentElement.scrollTop
-    );
   }
 
   click = id => {
@@ -39,7 +35,6 @@ class FleetList extends Component {
       obj
     } = this.props;
     var high = document.body.scrollTop || document.documentElement.scrollTop;
-    console.log("highhighhigh", high);
     let info = {};
     if (obj[parseInt(id, 10)]) {
       info = {
