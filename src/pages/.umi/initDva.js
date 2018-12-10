@@ -14,4 +14,4 @@ app.use(createLoading());
   app.use(plugin);
 });
 
-app.model({ namespace: 'index', ...(require('/Users/dany/Desktop/Daily-record/src/models/index.js').default) });
+app.model({ namespace: 'index', ...(require('/Users/dany/Desktop/blog/Daily_Record/src/models/index.js').default) });

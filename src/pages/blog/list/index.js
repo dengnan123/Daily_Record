@@ -32,13 +32,15 @@ class FleetList extends Component {
       location: {
         query: { labels }
       },
-      obj
+      obj,
+      titleObj
     } = this.props;
     var high = document.body.scrollTop || document.documentElement.scrollTop;
     let info = {};
     if (obj[parseInt(id, 10)]) {
       info = {
-        body: obj[parseInt(id, 10)]
+        body: obj[parseInt(id, 10)],
+        title: titleObj[parseInt(id, 10)]
       };
     }
     dispatch({
@@ -74,7 +76,7 @@ class FleetList extends Component {
                     title={value.title}
                     bordered={false}
                     className={styles.cardSpan}
-                    headStyle={{ color: "#3863a0" }}
+                    headStyle={{ color: "#3863a0", borderBottom: 0 }}
                     onClick={() => {
                       this.click(value.number);
                     }}
@@ -127,7 +129,8 @@ function indexStateToProps(state) {
     type,
     obj,
     high,
-    innerWidth
+    innerWidth,
+    titleObj
   } = state.indexModel;
   const arr = Array(15).fill(0);
   return {
@@ -139,7 +142,8 @@ function indexStateToProps(state) {
     type,
     obj,
     high,
-    innerWidth
+    innerWidth,
+    titleObj
   };
 }
 

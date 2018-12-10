@@ -41,12 +41,15 @@ class Detail extends Component {
 
   render() {
     const { loading, info, arr } = this.props;
+    console.log("infoinfo", info);
     const isLoading = loading.effects["indexModel/getInfo"];
     return (
       // <div className={styles.pageContent}>
-      <div>
+      <div className={styles.content}>
         <Skeleton loading={isLoading} active>
           <Card className={styles.card}>
+            <h3 className={styles.detailTitle}>{info.title}</h3>
+            {/* {info.body} */}
             {info.body ? (
               <div dangerouslySetInnerHTML={{ __html: marked(info.body) }} />
             ) : null}

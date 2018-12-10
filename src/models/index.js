@@ -14,6 +14,7 @@ export default {
     type: "all",
     from: "list",
     obj: {},
+    titleObj: {},
     high: 0,
     innerWidth: null,
     cache: {}
@@ -58,9 +59,11 @@ export default {
       if (res) {
         const numberArr = res.map(value => value.number);
         const obj = {};
+        const titleObj = {};
         for (const value of res) {
-          const { number, body } = value;
+          const { number, body, title } = value;
           obj[number] = body;
+          titleObj[number] = title;
         }
         yield put({
           type: "save",
@@ -68,6 +71,7 @@ export default {
             list: res,
             numberArr,
             obj,
+            titleObj,
             cache: {
               ...cache,
               [labels]: res

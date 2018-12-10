@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "dva";
 import styles from "./index.css";
 import router from "umi/router";
-import { Skeleton, Progress } from "antd";
+import { Skeleton, Progress, Spin } from "antd";
 
 class BasicLayout extends Component {
   componentWillMount() {
@@ -58,23 +58,45 @@ class BasicLayout extends Component {
     return (
       <div className={styles.normal}>
         <div className={styles.divTitle} id="nav">
-          <span
-            className={innerWidth < 450 ? styles.titleOther : styles.title}
-            onClick={this.click}
-          >
-            Daily Record
-          </span>
-          <a
-            href="https://github.com/dengnan123/Daily-record"
-            className={styles.link}
-            target="_blank"
-          >
-            <img
-              src={require("../../assets/github.png")}
-              className={styles.img}
-            />
-          </a>
-          {innerWidth < 450 ? null : (
+          <div className={styles.divTitleTop}>
+            <span
+              className={innerWidth < 450 ? styles.titleOther : styles.title}
+              onClick={this.click}
+            >
+              Daily Record
+            </span>
+            {innerWidth < 450 ? null : (
+              <Spin spinning={isLoading}>
+                <div className={styles.spinDiv}>
+                  {labels.map((value, index) => {
+                    return (
+                      <div
+                        key={value.name}
+                        className={type === value.name ? styles.divBlue : null}
+                        onClick={() => {
+                          this.divClick(value.name);
+                        }}
+                      >
+                        {value.name}
+                      </div>
+                    );
+                  })}
+                </div>
+              </Spin>
+            )}
+            <span className={styles.link}>
+              <a
+                href="https://github.com/dengnan123/Daily-record"
+                target="_blank"
+              >
+                <img
+                  src={require("../../assets/github.png")}
+                  className={styles.img}
+                />
+              </a>
+            </span>
+          </div>
+          {/* {innerWidth < 450 ? null : (
             <Skeleton loading={isLoading} active className={styles.skeleton}>
               <div className={styles.left}>
                 {labels.map((value, index) => {
@@ -92,7 +114,7 @@ class BasicLayout extends Component {
                 })}
               </div>
             </Skeleton>
-          )}
+          )} */}
         </div>
         <div
           className={innerWidth < 450 ? styles.contentOther : styles.content}
